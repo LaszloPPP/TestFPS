@@ -137,7 +137,7 @@ GameObject:
   - component: {fileID: 3259714}
   - component: {fileID: 3259713}
   - component: {fileID: 3259712}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cover
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1169,7 +1169,7 @@ GameObject:
   - component: {fileID: 362223511}
   - component: {fileID: 362223510}
   - component: {fileID: 362223509}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: MapBase(mirror)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9147,7 +9147,7 @@ GameObject:
   - component: {fileID: 414690141}
   - component: {fileID: 414690140}
   - component: {fileID: 414690139}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cover
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10033,7 +10033,7 @@ CharacterController:
   m_Height: 3.8
   m_Radius: 0.6
   m_SlopeLimit: 45
-  m_StepOffset: 0.3
+  m_StepOffset: 0.7
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
@@ -10045,12 +10045,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 672579414}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 31, y: 1, z: 29}
+  m_LocalPosition: {x: 31, y: 1.01, z: 29}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 963194228}
   - {fileID: 1302676392}
+  - {fileID: 2110741652}
   m_Father: {fileID: 0}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -10068,6 +10069,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 12
   controller: {fileID: 672579415}
+  gravity: -9.81
+  jumpHeight: 5
+  groundCheck: {fileID: 2110741652}
+  groundDistance: 0.4
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -10767,7 +10775,7 @@ GameObject:
   - component: {fileID: 970441165}
   - component: {fileID: 970441164}
   - component: {fileID: 970441163}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cover
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11805,7 +11813,7 @@ GameObject:
   - component: {fileID: 1057794192}
   - component: {fileID: 1057794191}
   - component: {fileID: 1057794190}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cover
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13146,7 +13154,7 @@ GameObject:
   - component: {fileID: 1534530621}
   - component: {fileID: 1534530620}
   - component: {fileID: 1534530619}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cover
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13850,7 +13858,7 @@ GameObject:
   - component: {fileID: 1623646717}
   - component: {fileID: 1623646716}
   - component: {fileID: 1623646715}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cover
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14554,7 +14562,7 @@ GameObject:
   - component: {fileID: 1726657388}
   - component: {fileID: 1726657387}
   - component: {fileID: 1726657386}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cover
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15422,7 +15430,7 @@ GameObject:
   - component: {fileID: 1739618756}
   - component: {fileID: 1739618755}
   - component: {fileID: 1739618754}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: MapBase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23400,7 +23408,7 @@ GameObject:
   - component: {fileID: 1916486579}
   - component: {fileID: 1916486578}
   - component: {fileID: 1916486577}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cover
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24104,7 +24112,7 @@ GameObject:
   - component: {fileID: 2090025563}
   - component: {fileID: 2090025562}
   - component: {fileID: 2090025561}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24286,6 +24294,37 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2110741651
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2110741652}
+  m_Layer: 0
+  m_Name: GroundCheck
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2110741652
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2110741651}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -2.01, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 672579416}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!43 &2137964839
