@@ -254,6 +254,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   walkSpeed: 7
   sprintSpeed: 10
+  slideSpeed: 0
+  speedIncreaseMultiplier: 0
+  slopeIncreaseMultiplier: 0
   groundDrag: 5
   jumpForce: 7
   jumpCooldown: 0.25
@@ -270,6 +273,7 @@ MonoBehaviour:
   maxSlopeAngle: 40
   orientation: {fileID: 1564741126}
   state: 0
+  sliding: 0
 --- !u!1 &76450704
 GameObject:
   m_ObjectHideFlags: 0
@@ -845,8 +849,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   walkSpeed: 7
   sprintSpeed: 10
-  groundDrag: 5
-  jumpForce: 7
+  slideSpeed: 25
+  speedIncreaseMultiplier: 1.5
+  slopeIncreaseMultiplier: 2.5
+  groundDrag: 4
+  jumpForce: 12
   jumpCooldown: 0.25
   airMultiplier: 0.4
   crouchSpeed: 3.5
@@ -858,9 +865,10 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 128
-  maxSlopeAngle: 50
+  maxSlopeAngle: 75
   orientation: {fileID: 1780791159}
   state: 0
+  sliding: 0
 --- !u!114 &117470940
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2744,7 +2752,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh23894
+  m_Name: pb_Mesh40732
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -5522,6 +5530,7 @@ MonoBehaviour:
   sensX: 400
   sensY: 400
   orientation: {fileID: 1780791159}
+  player: {fileID: 1166364543}
 --- !u!1 &1283322261
 GameObject:
   m_ObjectHideFlags: 0
@@ -6290,6 +6299,7 @@ MonoBehaviour:
   sensX: 400
   sensY: 400
   orientation: {fileID: 1564741126}
+  player: {fileID: 0}
 --- !u!81 &1398089266
 AudioListener:
   m_ObjectHideFlags: 0
