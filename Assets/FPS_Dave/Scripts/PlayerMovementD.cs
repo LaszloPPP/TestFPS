@@ -1,23 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class PlayerMovementD : MonoBehaviour
 {
     [Header("Movement")]
     private float moveSpeed;
+    private float desiredMoveSpeed;
+    private float lastDesiredMoveSpeed;
     public float walkSpeed;
     public float sprintSpeed;
     public float slideSpeed;
-
-    private float desiredMoveSpeed;
-    private float lastDesiredMoveSpeed;
+    public float wallrunSpeed;
 
     public float speedIncreaseMultiplier;
     public float slopeIncreaseMultiplier;
 
     public float groundDrag;
 
+    [Header("Jumping")]
     public float jumpForce;
     public float jumpCooldown;
     public float airMultiplier;
@@ -59,12 +61,19 @@ public class PlayerMovementD : MonoBehaviour
     {
         walking,
         sprinting,
+        wallrunning,
         crouching,
         sliding,
         air,
     }
 
     public bool sliding;
+    public bool crouching;
+    public bool wallrunning;
+
+    public TextMeshProUGUI text_speed;
+    public TextMeshProUGUI text_mode;
+
 
     private void Start()
     {
@@ -137,7 +146,14 @@ public class PlayerMovementD : MonoBehaviour
 
     private void StateHandler()
     {
-        //mode sliding
+        //mode - wallrunning
+        if (wallrunning)
+        {
+            state = MovementState.wallrunning;
+            desiredMoveSpeed = wallrunSpeed;
+        }
+        
+        //mode - sliding
         if (sliding)
         {
             state = MovementState.sliding;
@@ -150,7 +166,7 @@ public class PlayerMovementD : MonoBehaviour
 
 
         //Mode - crouching
-        else if (Input.GetKey(crouchKey))
+        else if (crouching)//(Input.GetKey(crouchKey))
         {
             state = MovementState.crouching;
             desiredMoveSpeed = crouchSpeed;
@@ -245,7 +261,7 @@ public class PlayerMovementD : MonoBehaviour
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
 
         //turn gravity off while on slope
-        //rb.useGravity = !OnSlope();
+        if(!wallrunning) rb.useGravity = !OnSlope();
     }
 
     private void SpeedControl()
