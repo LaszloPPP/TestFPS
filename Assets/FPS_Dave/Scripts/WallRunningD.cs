@@ -44,12 +44,14 @@ public class WallRunningD : MonoBehaviour
     public Transform orientation;
     public PlayerCamD cam;
     private PlayerMovementD pm;
+    private LedgeGrabbingD lg;
     private Rigidbody rb;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
         pm = GetComponent<PlayerMovementD>();
+        lg = GetComponent<LedgeGrabbingD>();
     }
 
     private void Update()
@@ -173,6 +175,11 @@ public class WallRunningD : MonoBehaviour
     }
     private void WallJump()
     {
+        if (lg.holding || lg.exitingLedge)
+        {
+            return;
+        }
+
         //enter exiting wall state
         exitingWall = true;
         exitWallTimer = exitWallTime;
