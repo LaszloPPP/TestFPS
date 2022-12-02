@@ -13,6 +13,7 @@ public class PlayerMovementD : MonoBehaviour
     public float sprintSpeed;
     public float slideSpeed;
     public float wallrunSpeed;
+    public float climbSpeed;
 
     public float speedIncreaseMultiplier;
     public float slopeIncreaseMultiplier;
@@ -39,12 +40,15 @@ public class PlayerMovementD : MonoBehaviour
     [Header("Groundcheck")]
     public float playerHeight;
     public LayerMask whatIsGround;
-    bool grounded;
+    public bool grounded;
 
     [Header("Slope Handling")]
     public float maxSlopeAngle;
     private RaycastHit slopeHit;
     private bool exitingSlope;
+
+    [Header("References")]
+    public ClimbingD climbingScript;
 
     public Transform orientation;
 
@@ -62,6 +66,7 @@ public class PlayerMovementD : MonoBehaviour
         walking,
         sprinting,
         wallrunning,
+        climbing,
         crouching,
         sliding,
         air,
@@ -70,6 +75,7 @@ public class PlayerMovementD : MonoBehaviour
     public bool sliding;
     public bool crouching;
     public bool wallrunning;
+    public bool climbing;
 
     public TextMeshProUGUI text_speed;
     public TextMeshProUGUI text_mode;
@@ -146,8 +152,16 @@ public class PlayerMovementD : MonoBehaviour
 
     private void StateHandler()
     {
+        //mode - climbing
+        if (climbing)
+        {
+            state = MovementState.climbing;
+            desiredMoveSpeed = climbSpeed;
+        }
+
+
         //mode - wallrunning
-        if (wallrunning)
+        else if (wallrunning)
         {
             state = MovementState.wallrunning;
             desiredMoveSpeed = wallrunSpeed;
@@ -240,6 +254,11 @@ public class PlayerMovementD : MonoBehaviour
 
     private void MovePlayer()
     {
+        if (climbingScript.exitingWall)
+        {
+            return;
+        }
+
         //calculate movement direction
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
 
